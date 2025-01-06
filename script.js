@@ -1,36 +1,15 @@
-// Function to automatically start the background music when the page loads
-window.onload = function() {
-    // Automatically play background music when the page loads
+// Function to handle autoplay of the background music
+function playMusic() {
     var backgroundMusic = document.getElementById('background-music');
-    backgroundMusic.play();
+    backgroundMusic.play().catch(function(error) {
+        console.error('Autoplay failed:', error);
+    });
+}
 
-    // Additional code for the Unity game
-    var unityContainer = document.querySelector("#unity-container");
-
-    // Dynamically load the Unity loader script
-    var script = document.createElement('script');
-    script.src = "/MissingTitleXamp/MissingTitleFinal/Build/MissingTitleFinal.loader.js"; // Ensure correct path
-    script.onload = function() {
-        // Check if UnityLoader is now defined
-        if (typeof UnityLoader !== "undefined") {
-            // Unity is available, instantiate the game
-            UnityLoader.instantiate("unity-container", "MissingTitleFinal/Build", {
-                onProgress: function(gameInstance, progress) {
-                    console.log("Loading progress: " + progress);
-                },
-                onError: function(error) {
-                    console.error("Error loading Unity game:", error);
-                }
-            });
-        } else {
-            console.error("UnityLoader is not defined!");
-        }
-    };
-    script.onerror = function() {
-        console.error("Error loading Unity loader script.");
-    };
-    document.body.appendChild(script);
-};
+// Add an event listener for the first interaction with the page
+window.addEventListener('click', function() {
+    playMusic();
+}, { once: true }); // Ensures it only runs once when the first click happens
 
 // Function to start the storyline page
 function startStory() {
