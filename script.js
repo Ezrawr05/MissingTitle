@@ -9,6 +9,10 @@ function startStory() {
 
     // Show the storyline section
     document.getElementById("story-section").style.display = "flex";
+
+    // Start the background music
+    const backgroundMusic = document.getElementById('background-music');
+    backgroundMusic.play(); // Try playing the audio here
 }
 
 // Function to start the game
